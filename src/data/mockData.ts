@@ -1,360 +1,137 @@
-import { Category, Project, Review } from '../types';
+import { Bot, Review } from '../types';
 
-export const mockCategories: Category[] = [
-  {
-    id: 'cybersecurity',
-    name: 'Cybersecurity',
-    description: 'Security tools, frameworks, and best practices for protecting digital assets',
-    icon: 'Shield',
-    color: 'from-red-500 to-red-600',
-    projectCount: 12,
-  },
-  {
-    id: 'sysadmin',
-    name: 'System Administration',
-    description: 'Tools and scripts for managing servers, networks, and infrastructure',
-    icon: 'Server',
-    color: 'from-blue-500 to-blue-600',
-    projectCount: 8,
-  },
-  {
-    id: 'ai',
-    name: 'Artificial Intelligence',
-    description: 'Machine learning models, AI frameworks, and intelligent automation',
-    icon: 'Brain',
-    color: 'from-purple-500 to-purple-600',
-    projectCount: 15,
-  },
-  {
-    id: 'webdev',
-    name: 'Web Development',
-    description: 'Modern web applications, frameworks, and development tools',
-    icon: 'Code',
-    color: 'from-green-500 to-green-600',
-    projectCount: 20,
-  },
-];
-
-export const mockProjects: Project[] = [
+const botReviews: Review[] = [
   {
     id: '1',
-    title: 'Advanced Network Scanner',
-    description: 'A comprehensive network scanning tool with vulnerability detection capabilities. Features port scanning, service enumeration, and security assessment.',
-    categoryId: 'cybersecurity',
-    technicalSpecs: [
-      {
-        id: '1',
-        category: 'System Requirements',
-        requirements: ['Python 3.8+', 'Linux/Windows/macOS', '2GB RAM minimum', 'Network access'],
-      },
-      {
-        id: '2',
-        category: 'Dependencies',
-        requirements: ['nmap', 'python-nmap', 'requests', 'beautifulsoup4'],
-      },
-    ],
-    implementationGuide: `# Network Scanner Implementation Guide
-
-## Installation
-1. Clone the repository
-2. Install dependencies: \`pip install -r requirements.txt\`
-3. Configure network settings in config.json
-4. Run: \`python scanner.py --target <IP_RANGE>\`
-
-## Usage Examples
-- Basic scan: \`python scanner.py -t 192.168.1.0/24\`
-- Vulnerability scan: \`python scanner.py -t 192.168.1.1 --vuln\`
-- Service detection: \`python scanner.py -t 192.168.1.1 --services\`
-
-## Configuration
-Edit config.json to customize scan parameters, timeout values, and output formats.`,
-    resources: [
-      {
-        id: '1',
-        title: 'Nmap Documentation',
-        url: 'https://nmap.org/docs.html',
-        type: 'documentation',
-      },
-      {
-        id: '2',
-        title: 'Python Network Programming',
-        url: 'https://docs.python.org/3/library/socket.html',
-        type: 'documentation',
-      },
-    ],
-    files: [
-      {
-        id: '1',
-        name: 'network-scanner-v2.1.zip',
-        size: 2048576,
-        type: 'application/zip',
-        url: '/downloads/network-scanner-v2.1.zip',
-        uploadedAt: new Date('2024-01-15'),
-        version: '2.1',
-      },
-    ],
-    githubUrl: 'https://github.com/example/network-scanner',
-    tags: ['security', 'networking', 'python', 'vulnerability'],
-    difficulty: 'Advanced',
-    estimatedTime: '4-6 hours',
-    createdAt: new Date('2024-01-10'),
-    updatedAt: new Date('2024-01-15'),
-    featured: true,
-    downloads: 1247,
-    views: 3521,
+    botId: '1',
+    username: 'Discord User',
+    rating: 5,
+    comment: 'Amazing moderation bot! Works perfectly.',
+    createdAt: new Date('2024-01-15'),
+    reported: false
   },
   {
     id: '2',
-    title: 'Server Monitoring Dashboard',
-    description: 'Real-time server monitoring solution with alerting, metrics collection, and performance analytics.',
-    categoryId: 'sysadmin',
-    technicalSpecs: [
-      {
-        id: '1',
-        category: 'System Requirements',
-        requirements: ['Node.js 16+', 'Docker (optional)', '4GB RAM', 'Linux/Windows Server'],
-      },
-      {
-        id: '2',
-        category: 'Technologies',
-        requirements: ['React', 'Express.js', 'InfluxDB', 'Grafana'],
-      },
-    ],
-    implementationGuide: `# Server Monitoring Setup
-
-## Quick Start
-1. Install Node.js and npm
-2. Clone repository: \`git clone <repo-url>\`
-3. Install dependencies: \`npm install\`
-4. Configure environment: \`cp .env.example .env\`
-5. Start services: \`npm run start\`
-
-## Docker Deployment
-\`\`\`bash
-docker-compose up -d
-\`\`\`
-
-## Configuration
-- Edit \`config/monitoring.json\` for custom metrics
-- Set up alerts in \`config/alerts.json\`
-- Configure data retention policies`,
-    resources: [
-      {
-        id: '1',
-        title: 'InfluxDB Documentation',
-        url: 'https://docs.influxdata.com/',
-        type: 'documentation',
-      },
-      {
-        id: '2',
-        title: 'Grafana Tutorials',
-        url: 'https://grafana.com/tutorials/',
-        type: 'tutorial',
-      },
-    ],
-    files: [
-      {
-        id: '1',
-        name: 'monitoring-dashboard-v1.5.tar.gz',
-        size: 15728640,
-        type: 'application/gzip',
-        url: '/downloads/monitoring-dashboard-v1.5.tar.gz',
-        uploadedAt: new Date('2024-01-20'),
-        version: '1.5',
-      },
-    ],
-    githubUrl: 'https://github.com/example/server-monitoring',
-    tags: ['monitoring', 'dashboard', 'nodejs', 'docker'],
-    difficulty: 'Intermediate',
-    estimatedTime: '2-3 hours',
-    createdAt: new Date('2024-01-18'),
-    updatedAt: new Date('2024-01-20'),
-    featured: true,
-    downloads: 892,
-    views: 2134,
+    botId: '1',
+    username: 'ServerOwner123',
+    rating: 4,
+    comment: 'Great features, easy to setup.',
+    createdAt: new Date('2024-01-20'),
+    reported: false
   },
   {
     id: '3',
-    title: 'ML Model Deployment Pipeline',
-    description: 'Automated pipeline for deploying machine learning models with CI/CD integration and monitoring.',
-    categoryId: 'ai',
-    technicalSpecs: [
-      {
-        id: '1',
-        category: 'System Requirements',
-        requirements: ['Python 3.9+', 'Docker', 'Kubernetes (optional)', '8GB RAM'],
-      },
-      {
-        id: '2',
-        category: 'ML Frameworks',
-        requirements: ['TensorFlow 2.x', 'PyTorch', 'Scikit-learn', 'MLflow'],
-      },
-    ],
-    implementationGuide: `# ML Deployment Pipeline
+    botId: '2',
+    username: 'MusicLover',
+    rating: 5,
+    comment: 'Best music bot I\'ve used! Clear audio quality.',
+    createdAt: new Date('2024-01-18'),
+    reported: false
+  }
+];
 
-## Setup
-1. Install Python dependencies: \`pip install -r requirements.txt\`
-2. Configure MLflow tracking server
-3. Set up model registry
-4. Deploy using Docker: \`docker build -t ml-pipeline .\`
-
-## Model Training
-\`\`\`python
-python train_model.py --config config/model_config.yaml
-\`\`\`
-
-## Deployment
-\`\`\`bash
-python deploy.py --model-name my-model --version 1.0
-\`\`\`
-
-## Monitoring
-Access monitoring dashboard at http://localhost:8080/monitoring`,
-    resources: [
-      {
-        id: '1',
-        title: 'MLflow Documentation',
-        url: 'https://mlflow.org/docs/latest/index.html',
-        type: 'documentation',
-      },
-      {
-        id: '2',
-        title: 'Model Deployment Best Practices',
-        url: 'https://ml-ops.org/',
-        type: 'tutorial',
-      },
-    ],
-    files: [
-      {
-        id: '1',
-        name: 'ml-pipeline-v3.0.zip',
-        size: 52428800,
-        type: 'application/zip',
-        url: '/downloads/ml-pipeline-v3.0.zip',
-        uploadedAt: new Date('2024-01-25'),
-        version: '3.0',
-      },
-    ],
-    githubUrl: 'https://github.com/example/ml-deployment',
-    tags: ['machine-learning', 'deployment', 'mlops', 'python'],
-    difficulty: 'Advanced',
-    estimatedTime: '6-8 hours',
-    createdAt: new Date('2024-01-22'),
+export const mockBots: Bot[] = [
+  {
+    id: '1',
+    name: 'ModGuard Pro',
+    description: 'Advanced moderation bot with auto-moderation, warning system, and detailed logging. Perfect for large servers.',
+    category: 'moderation',
+    downloadLink: '/downloads/modguard-pro.js',
+    githubLink: 'https://github.com/example/modguard-pro',
+    likes: 1247,
+    downloads: 3521,
+    rating: 4.8,
+    reviews: botReviews.filter(r => r.botId === '1'),
+    imageUrl: 'https://images.pexels.com/photos/5380664/pexels-photo-5380664.jpeg?auto=compress&cs=tinysrgb&w=400',
+    tags: ['moderation', 'auto-mod', 'logging', 'warnings'],
+    createdAt: new Date('2024-01-01'),
     updatedAt: new Date('2024-01-25'),
-    featured: true,
-    downloads: 1543,
-    views: 4102,
+    featured: true
+  },
+  {
+    id: '2',
+    name: 'Harmony Music',
+    description: 'High-quality music bot with playlist support, queue management, and premium audio filters.',
+    category: 'music',
+    downloadLink: '/downloads/harmony-music.js',
+    githubLink: 'https://github.com/example/harmony-music',
+    likes: 2156,
+    downloads: 5643,
+    rating: 4.9,
+    reviews: botReviews.filter(r => r.botId === '2'),
+    imageUrl: 'https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=400',
+    tags: ['music', 'playlists', 'filters', 'queue'],
+    createdAt: new Date('2024-01-05'),
+    updatedAt: new Date('2024-01-28'),
+    featured: true
+  },
+  {
+    id: '3',
+    name: 'GameMaster',
+    description: 'Fun gaming bot with trivia, word games, and multiplayer challenges for your Discord server.',
+    category: 'games',
+    downloadLink: '/downloads/gamemaster.js',
+    likes: 892,
+    downloads: 2134,
+    rating: 4.6,
+    reviews: [],
+    imageUrl: 'https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&w=400',
+    tags: ['games', 'trivia', 'multiplayer', 'fun'],
+    createdAt: new Date('2024-01-10'),
+    updatedAt: new Date('2024-01-30'),
+    featured: false
   },
   {
     id: '4',
-    title: 'React E-commerce Platform',
-    description: 'Full-featured e-commerce platform built with React, Node.js, and modern web technologies.',
-    categoryId: 'webdev',
-    technicalSpecs: [
-      {
-        id: '1',
-        category: 'Frontend',
-        requirements: ['React 18+', 'TypeScript', 'Tailwind CSS', 'Vite'],
-      },
-      {
-        id: '2',
-        category: 'Backend',
-        requirements: ['Node.js 18+', 'Express.js', 'MongoDB', 'JWT Authentication'],
-      },
-    ],
-    implementationGuide: `# E-commerce Platform Setup
-
-## Frontend Setup
-1. Navigate to frontend directory: \`cd frontend\`
-2. Install dependencies: \`npm install\`
-3. Start development server: \`npm run dev\`
-
-## Backend Setup
-1. Navigate to backend directory: \`cd backend\`
-2. Install dependencies: \`npm install\`
-3. Configure environment variables
-4. Start server: \`npm run start\`
-
-## Database Setup
-1. Install MongoDB
-2. Create database: \`ecommerce_db\`
-3. Run migrations: \`npm run migrate\`
-
-## Features
-- User authentication and authorization
-- Product catalog with search and filtering
-- Shopping cart and checkout process
-- Order management and tracking
-- Admin dashboard for inventory management`,
-    resources: [
-      {
-        id: '1',
-        title: 'React Documentation',
-        url: 'https://react.dev/',
-        type: 'documentation',
-      },
-      {
-        id: '2',
-        title: 'E-commerce Best Practices',
-        url: 'https://web.dev/ecommerce/',
-        type: 'tutorial',
-      },
-    ],
-    files: [
-      {
-        id: '1',
-        name: 'ecommerce-platform-v2.3.zip',
-        size: 31457280,
-        type: 'application/zip',
-        url: '/downloads/ecommerce-platform-v2.3.zip',
-        uploadedAt: new Date('2024-01-28'),
-        version: '2.3',
-      },
-    ],
-    githubUrl: 'https://github.com/example/react-ecommerce',
-    tags: ['react', 'ecommerce', 'nodejs', 'mongodb'],
-    difficulty: 'Intermediate',
-    estimatedTime: '8-12 hours',
-    createdAt: new Date('2024-01-26'),
-    updatedAt: new Date('2024-01-28'),
-    featured: false,
-    downloads: 743,
-    views: 1876,
+    name: 'EconoBot',
+    description: 'Complete economy system with virtual currency, shop, gambling, and leaderboards.',
+    category: 'economy',
+    downloadLink: '/downloads/econobot.js',
+    likes: 1543,
+    downloads: 4102,
+    rating: 4.7,
+    reviews: [],
+    imageUrl: 'https://images.pexels.com/photos/259027/pexels-photo-259027.jpeg?auto=compress&cs=tinysrgb&w=400',
+    tags: ['economy', 'currency', 'shop', 'gambling'],
+    createdAt: new Date('2024-01-08'),
+    updatedAt: new Date('2024-01-29'),
+    featured: true
   },
+  {
+    id: '5',
+    name: 'UtilityPro',
+    description: 'Essential utility commands including weather, calculator, reminders, and server information.',
+    category: 'utility',
+    downloadLink: '/downloads/utilitypro.js',
+    likes: 743,
+    downloads: 1876,
+    rating: 4.4,
+    reviews: [],
+    imageUrl: 'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=400',
+    tags: ['utility', 'weather', 'calculator', 'reminders'],
+    createdAt: new Date('2024-01-12'),
+    updatedAt: new Date('2024-01-31'),
+    featured: false
+  },
+  {
+    id: '6',
+    name: 'FunBot Supreme',
+    description: 'Entertainment bot with memes, jokes, random facts, and interactive mini-games.',
+    category: 'fun',
+    downloadLink: '/downloads/funbot-supreme.js',
+    likes: 1892,
+    downloads: 3847,
+    rating: 4.5,
+    reviews: [],
+    imageUrl: 'https://images.pexels.com/photos/1714208/pexels-photo-1714208.jpeg?auto=compress&cs=tinysrgb&w=400',
+    tags: ['fun', 'memes', 'jokes', 'entertainment'],
+    createdAt: new Date('2024-01-07'),
+    updatedAt: new Date('2024-01-26'),
+    featured: false
+  }
 ];
 
-export const mockReviews: Review[] = [
-  {
-    id: '1',
-    projectId: '1',
-    username: 'SecurityExpert',
-    email: 'expert@security.com',
-    rating: 5,
-    comment: 'Excellent network scanner! Very comprehensive and easy to use. The vulnerability detection feature is particularly impressive.',
-    status: 'approved',
-    createdAt: new Date('2024-01-16'),
-    updatedAt: new Date('2024-01-16'),
-  },
-  {
-    id: '2',
-    projectId: '1',
-    username: 'NetworkAdmin',
-    email: 'admin@network.com',
-    rating: 4,
-    comment: 'Great tool for network assessment. Documentation could be more detailed, but overall very useful.',
-    status: 'approved',
-    createdAt: new Date('2024-01-17'),
-    updatedAt: new Date('2024-01-17'),
-  },
-  {
-    id: '3',
-    projectId: '2',
-    username: 'DevOpsEngineer',
-    email: 'devops@company.com',
-    rating: 5,
-    comment: 'Perfect monitoring solution! Easy to deploy and provides excellent insights into server performance.',
-    status: 'pending',
-    createdAt: new Date('2024-01-21'),
-    updatedAt: new Date('2024-01-21'),
-  },
-];
+export const profanityFilter = (text: string): boolean => {
+  const badWords = ['spam', 'hate', 'toxic', 'abuse', 'inappropriate'];
+  return badWords.some(word => text.toLowerCase().includes(word));
+};

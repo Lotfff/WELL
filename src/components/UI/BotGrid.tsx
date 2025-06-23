@@ -33,15 +33,15 @@ const BotGrid: React.FC = () => {
   }, [state.bots, state.selectedCategory, state.searchQuery]);
 
   return (
-    <section className="py-16">
+    <section id="bots" className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            اكتشف بوتات ديسكورد المتميزة
+            Discover Premium Discord Bots
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            اختر من مجموعتنا المختارة بعناية من البوتات عالية الجودة، 
-            كل منها مصمم لتحسين تجربة خادم ديسكورد الخاص بك.
+            Choose from our carefully curated collection of high-quality bots, 
+            each designed to enhance your Discord server experience.
           </p>
         </div>
 
@@ -54,20 +54,20 @@ const BotGrid: React.FC = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.47-.881-6.08-2.33" />
               </svg>
             </div>
-            <h3 className="text-xl font-medium text-gray-900 mb-2">لم يتم العثور على بوتات</h3>
+            <h3 className="text-xl font-medium text-gray-900 mb-2">No bots found</h3>
             <p className="text-gray-600">
-              جرب تعديل البحث أو فلتر الفئة للعثور على ما تبحث عنه.
+              Try adjusting your search or category filter to find what you're looking for.
             </p>
           </div>
         ) : (
           <>
             <div className="mb-6 text-sm text-gray-600">
-              عرض {filteredBots.length} بوت{filteredBots.length !== 1 ? '' : ''}
+              Showing {filteredBots.length} bot{filteredBots.length !== 1 ? 's' : ''}
               {state.selectedCategory !== 'all' && (
-                <span> في فئة {state.selectedCategory}</span>
+                <span> in {state.selectedCategory}</span>
               )}
               {state.searchQuery && (
-                <span> يطابق "{state.searchQuery}"</span>
+                <span> matching "{state.searchQuery}"</span>
               )}
             </div>
 

@@ -8,13 +8,11 @@ interface AppState {
   searchQuery: string;
   selectedCategory: string;
   adminClickCount: number;
-  currentPage: 'home' | 'bots';
 }
 
 type AppAction =
   | { type: 'SET_SEARCH_QUERY'; payload: string }
   | { type: 'SET_SELECTED_CATEGORY'; payload: string }
-  | { type: 'SET_CURRENT_PAGE'; payload: 'home' | 'bots' }
   | { type: 'LIKE_BOT'; payload: string }
   | { type: 'ADD_REVIEW'; payload: { botId: string; review: Omit<Review, 'id'> } }
   | { type: 'ADD_BOT'; payload: Bot }
@@ -31,8 +29,7 @@ const initialState: AppState = {
   isAdmin: false,
   searchQuery: '',
   selectedCategory: 'all',
-  adminClickCount: 0,
-  currentPage: 'home'
+  adminClickCount: 0
 };
 
 const appReducer = (state: AppState, action: AppAction): AppState => {
@@ -42,9 +39,6 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
     
     case 'SET_SELECTED_CATEGORY':
       return { ...state, selectedCategory: action.payload };
-    
-    case 'SET_CURRENT_PAGE':
-      return { ...state, currentPage: action.payload };
     
     case 'LIKE_BOT':
       return {

@@ -23,7 +23,7 @@ const BotCard: React.FC<BotCardProps> = ({ bot }) => {
   const handleDownload = () => {
     dispatch({ type: 'DOWNLOAD_BOT', payload: bot.id });
     // In a real app, this would trigger the actual download
-    alert('تم بدء التحميل! تحقق من مجلد التحميلات.');
+    alert('Download started! Check your downloads folder.');
   };
 
   const getCategoryColor = (category: string) => {
@@ -31,28 +31,16 @@ const BotCard: React.FC<BotCardProps> = ({ bot }) => {
       moderation: 'bg-red-100 text-red-800',
       music: 'bg-purple-100 text-purple-800',
       games: 'bg-blue-100 text-blue-800',
-      economy: 'bg-emerald-100 text-emerald-800',
+      economy: 'bg-green-100 text-green-800',
       utility: 'bg-orange-100 text-orange-800',
       fun: 'bg-pink-100 text-pink-800'
     };
     return colors[category as keyof typeof colors] || 'bg-gray-100 text-gray-800';
   };
 
-  const getCategoryName = (category: string) => {
-    const names = {
-      moderation: 'إدارة',
-      music: 'موسيقى',
-      games: 'ألعاب',
-      economy: 'اقتصاد',
-      utility: 'أدوات',
-      fun: 'ترفيه'
-    };
-    return names[category as keyof typeof names] || category;
-  };
-
   return (
     <>
-      <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden border border-emerald-100">
+      <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
         {/* Bot Image */}
         <div className="relative h-48 overflow-hidden">
           <img
@@ -61,13 +49,13 @@ const BotCard: React.FC<BotCardProps> = ({ bot }) => {
             className="w-full h-full object-cover"
           />
           {bot.featured && (
-            <div className="absolute top-3 left-3 bg-gradient-to-r from-emerald-400 to-teal-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-              مميز
+            <div className="absolute top-3 left-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+              Featured
             </div>
           )}
           <div className="absolute top-3 right-3">
             <span className={`px-2 py-1 rounded-full text-xs font-medium ${getCategoryColor(bot.category)}`}>
-              {getCategoryName(bot.category)}
+              {bot.category.charAt(0).toUpperCase() + bot.category.slice(1)}
             </span>
           </div>
         </div>
@@ -93,7 +81,7 @@ const BotCard: React.FC<BotCardProps> = ({ bot }) => {
             {bot.tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
-                className="bg-emerald-100 text-emerald-600 px-2 py-1 rounded-md text-xs"
+                className="bg-gray-100 text-gray-600 px-2 py-1 rounded-md text-xs"
               >
                 #{tag}
               </span>
@@ -113,7 +101,7 @@ const BotCard: React.FC<BotCardProps> = ({ bot }) => {
               </div>
             </div>
             <div className="text-xs text-gray-400">
-              {bot.reviews.length} تقييم
+              {bot.reviews.length} reviews
             </div>
           </div>
 
@@ -121,10 +109,10 @@ const BotCard: React.FC<BotCardProps> = ({ bot }) => {
           <div className="flex space-x-2">
             <button
               onClick={() => setShowModal(true)}
-              className="flex-1 bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-2 px-4 rounded-lg hover:from-emerald-600 hover:to-teal-700 transition-all flex items-center justify-center space-x-2"
+              className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 px-4 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all flex items-center justify-center space-x-2"
             >
               <Eye className="w-4 h-4" />
-              <span>عرض التفاصيل</span>
+              <span>View Details</span>
             </button>
             
             <button

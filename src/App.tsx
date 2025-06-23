@@ -1,39 +1,34 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import { DataProvider } from './context/DataContext';
-import HomePage from './pages/HomePage';
-import CategoryPage from './pages/CategoryPage';
-import ProjectDetailPage from './pages/ProjectDetailPage';
-import AdminPanel from './pages/AdminPanel';
-import LoginPage from './pages/LoginPage';
-import ProtectedRoute from './components/Auth/ProtectedRoute';
-import Layout from './components/Layout/Layout';
+import { AppProvider } from './context/AppContext';
+import Header from './components/UI/Header';
+import Hero from './components/UI/Hero';
+import BotGrid from './components/UI/BotGrid';
+import Footer from './components/UI/Footer';
+import AdminPanel from './components/Admin/AdminPanel';
+import { useApp } from './context/AppContext';
+
+const AppContent: React.FC = () => {
+  const { state } = useApp();
+
+  if (state.isAdmin) {
+    return <AdminPanel />;
+  }
+
+  return (
+    <div className="min-h-screen bg-white">
+      <Header />
+      <Hero />
+      <BotGrid />
+      <Footer />
+    </div>
+  );
+};
 
 function App() {
   return (
-    <AuthProvider>
-      <DataProvider>
-        <Router>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/category/:categoryId" element={<CategoryPage />} />
-              <Route path="/project/:projectId" element={<ProjectDetailPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route 
-                path="/admin/*" 
-                element={
-                  <ProtectedRoute>
-                    <AdminPanel />
-                  </ProtectedRoute>
-                } 
-              />
-            </Routes>
-          </Layout>
-        </Router>
-      </DataProvider>
-    </AuthProvider>
+    <AppProvider>
+      <AppContent />
+    </AppProvider>
   );
 }
 
