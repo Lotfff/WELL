@@ -1,29 +1,39 @@
 import React from 'react';
-import { AppProvider } from './context/AppContext';
-import { useApp } from './context/AppContext';
-import HomePage from './components/Pages/HomePage';
-import BotsPage from './components/Pages/BotsPage';
-import AdminPanel from './components/Admin/AdminPanel';
-
-const AppContent: React.FC = () => {
-  const { state } = useApp();
-
-  if (state.isAdmin) {
-    return <AdminPanel />;
-  }
-
-  if (state.currentPage === 'bots') {
-    return <BotsPage />;
-  }
-
-  return <HomePage />;
-};
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import { DataProvider } from './context/DataContext';
+import HomePage from './pages/HomePage';
+import CategoryPage from './pages/CategoryPage';
+import ProjectDetailPage from './pages/ProjectDetailPage';
+import AdminPanel from './pages/AdminPanel';
+import LoginPage from './pages/LoginPage';
+import ProtectedRoute from './components/Auth/ProtectedRoute';
+import Layout from './components/Layout/Layout';
 
 function App() {
   return (
-    <AppProvider>
-      <AppContent />
-    </AppProvider>
+    <AuthProvider>
+      <DataProvider>
+        <Router>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/category/:categoryId" element={<CategoryPage />} />
+              <Route path="/project/:projectId" element={<ProjectDetailPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route 
+                path="/admin/*" 
+                element={
+                  <ProtectedRoute>
+                    <AdminPanel />
+                  </ProtectedRoute>
+                } 
+              />
+            </Routes>
+          </Layout>
+        </Router>
+      </DataProvider>
+    </AuthProvider>
   );
 }
 
